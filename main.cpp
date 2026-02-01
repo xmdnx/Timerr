@@ -100,16 +100,24 @@ int main(int argc, char* argv[]) {
       theme = 1;
     }
   });
-  bool c = 1;
+  bool c = 0;
   QObject::connect(cha, &QPushButton::clicked, [&sw, &c]() {
     c = !c;
     sw->setCurrentIndex(c);
   });
   sw->addWidget(gt);
   sw->setCurrentWidget(gt);
-  timer->start(1000);
   QWidget* second = new QWidget();
   sw->addWidget(second);
+  QPushButton* cha1 = new QPushButton(second);
+  cha1->move(win.width() - 75, win.height() - 25);
+  cha1->setText("switch");
+  cha1->resize(75, 25);
+  QObject::connect(cha1, &QPushButton::clicked, [&sw, &c]() {
+    c = !c;
+    sw->setCurrentIndex(c);
+  });
+  timer->start(1000);
   win.show();
   return app.exec();
 }
