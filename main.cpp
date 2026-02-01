@@ -37,13 +37,22 @@ int main(int argc, char* argv[]) {
 
   lab->resize(450, 120);
   lab->move((win.width() - 450)/2, (win.height() - 120)/2 - 200);
-  lab->setStyleSheet("QLabel {font-family: 'Times new Roman'; font-size: 96px; color: #1e1e2e; background-color: #f5f5f5; border: 1px solid #3498db; border-radius: 10px; padding: 20px 20px;}");
+  lab->setStyleSheet("QLabel {font-family: 'Times new Roman';" 
+    "font-size: 96px;" 
+    "color: #1e1e2e;" 
+    "background-color: #f5f5f5;" 
+    "border: 1px solid #3498db;" 
+    "border-radius: 10px;" 
+    "padding: 20px 20px;}");
   lab->setText(QDateTime::currentDateTimeUtc().addSecs((howmuchtime - 7)*3600).time().toString("hh:mm:ss"));
   
   b->setText("stop/continue");
   b->resize(100, 50);
   b->move((1024 - 100)/2, (900 - 50)/2 - 25);
-  b->setStyleSheet("QPushButton{background-color: #4361ee; border-radius: 10px;} QPushButton:hover {background-color: #3a56e4;} QPushButton:pressed {background-color: #2d46b9;}");
+  b->setStyleSheet("QPushButton{background-color: #4361ee;" 
+    "border-radius: 10px;}" 
+    "QPushButton:hover {background-color: #3a56e4;}" 
+    "QPushButton:pressed {background-color: #2d46b9;}");
   
   ch->setText("change theme");
   ch->resize(100, 25);
@@ -57,6 +66,13 @@ int main(int argc, char* argv[]) {
   cha->move(win.width() - 75, win.height() - 25);
   cha->setText("switch");
   cha->resize(75, 25);
+  cha->setStyleSheet("QPushButton {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #5DA9E9, stop: 1 #2E7BB4);"
+    "color: white;"
+    "border: 1px solid #2E7BB4;"
+    "border-radius: 15px;"
+    "padding: 5px;}"
+    "QPushButton:pressed {"
+    "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2E7BB4, stop: 1 #5DA9E9);}");
   
   cb->addItem("Лондон, UTC+0");
   cb->addItem("Париж, UTC+1");
@@ -83,11 +99,19 @@ int main(int argc, char* argv[]) {
   cb->addItem("Южная Георгия, UTC-2");
   cb->addItem("Прая, UTC-1");
   cb->resize(200, 30);
-  cb->setStyleSheet("QComboBox{background-color: #99abff; color: #1c2920}");
+  cb->setStyleSheet("QComboBox{background-color: #99abff;" 
+    "color: #1c2920}");
   
   cha1->move(win.width() - 75, win.height() - 25);
   cha1->setText("switch");
   cha1->resize(75, 25);
+  cha1->setStyleSheet("QPushButton {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #5DA9E9, stop: 1 #2E7BB4);"
+    "color: white;"
+    "border: 1px solid #2E7BB4;"
+    "border-radius: 15px;"
+    "padding: 5px;}"
+    "QPushButton:pressed {"
+    "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2E7BB4, stop: 1 #5DA9E9);}");
   
   QObject::connect(cb, QOverload<int>::of(&QComboBox::currentIndexChanged), [&howmuchtime](int in) {
     howmuchtime = in;
