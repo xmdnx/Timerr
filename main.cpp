@@ -6,36 +6,44 @@
 #include <QDate>
 #include <QPushButton>
 #include <QComboBox>
+#include <QStackedWidget>
 
 int main(int argc, char* argv[]) {
   int howmuchtime = 3;
   QApplication app(argc, argv);
   app.setStyle("Fusion");
   QMainWindow win;
+  QStackedWidget* sw = new QStackedWidget(&win);
+  win.setCentralWidget(sw);
+  QWidget* gt = new QWidget();
   win.resize(1024, 900);
-  win.setWindowTitle("timerr");
+  win.setWindowTitle("Timerr");
   win.setStyleSheet("QMainWindow {background-color: #1e1e2e}");
-  QLabel* lab = new QLabel(&win);
+  QLabel* lab = new QLabel(gt);
   lab->resize(450, 120);
   lab->move((win.width() - 450)/2, (win.height() - 120)/2 - 200);
   lab->setStyleSheet("QLabel {font-family: 'Times new Roman'; font-size: 96px; color: #1e1e2e; background-color: #f5f5f5; border: 1px solid #3498db; border-radius: 10px; padding: 20px 20px;}");
-  QTimer* timer = new QTimer(&win);
-  QPushButton* b = new QPushButton(&win);
+  QTimer* timer = new QTimer(gt);
+  QPushButton* b = new QPushButton(gt);
   b->setText("stop/continue");
   b->resize(100, 50);
   b->move((1024 - 100)/2, (900 - 50)/2 - 25);
   b->setStyleSheet("QPushButton{background-color: #4361ee; border-radius: 10px;} QPushButton:hover {background-color: #3a56e4;} QPushButton:pressed {background-color: #2d46b9;}");
   bool isRunning = 1, theme = 1;
-  QPushButton* ch = new QPushButton(&win);
+  QPushButton* ch = new QPushButton(gt);
   ch->setText("change theme");
   ch->resize(100, 25);
   ch->move(win.width() - 100, 0);
-  QLabel* dat = new QLabel(&win);
+  QLabel* dat = new QLabel(gt);
   dat->setText(QDate::currentDate().toString("d MMMM yyyy"));
   dat->resize(200, 100);
   dat->move((win.width() - 200)/2, (win.height() - 100)/2 - 120);
   dat->setStyleSheet("QLabel {font-family: 'Times new Roman'; font-size: 32px; color: #ffffff}");
-  QComboBox* cb = new QComboBox(&win);
+  QPushButton* cha = new QPushButton(gt);
+  cha->move(win.width() - 75, win.height() - 25);
+  cha->setText("switch");
+  cha->resize(75, 25);
+  QComboBox* cb = new QComboBox(gt);
   cb->addItem("Лондон, UTC+0");
   cb->addItem("Париж, UTC+1");
   cb->addItem("Калининград, UTC+2");  
@@ -66,13 +74,13 @@ int main(int argc, char* argv[]) {
     howmuchtime = in;
   });
   if (isRunning) lab->setText(QDateTime::currentDateTimeUtc().addSecs((howmuchtime - 7)*3600).time().toString("hh:mm:ss"));
-  win.show();
-  QObject::connect(timer, &QTimer::timeout, [&lab, &isRunning, &win, &dat, &ch, &b, &howmuchtime]() {
+  QObject::connect(timer, &QTimer::timeout, [&lab, &isRunning, &win, &dat, &ch, &b, &howmuchtime, &cha]() {
   if (isRunning) lab->setText(QDateTime::currentDateTimeUtc().addSecs((howmuchtime - 7)*3600).time().toString("hh:mm:ss"));
       lab->move((win.width() - 450)/2, (win.height() - 120)/2 - 200);
       dat->move((win.width() - 200)/2, (win.height() - 100)/2 - 120);
       ch->move(win.width() - 100, 0);
       b->move((win.width() - 100)/2, (win.height() - 50)/2 - 25);
+      cha->move(win.width() - 75, win.height() - 25);
   });
   QObject::connect(b, &QPushButton::clicked, [&isRunning]() {
     isRunning = !isRunning;
@@ -92,6 +100,16 @@ int main(int argc, char* argv[]) {
       theme = 1;
     }
   });
+  bool c = 1;
+  QObject::connect(cha, &QPushButton::clicked, [&sw, &c]() {
+    c = !c;
+    sw->setCurrentIndex(c);
+  });
+  sw->addWidget(gt);
+  sw->setCurrentWidget(gt);
   timer->start(1000);
+  QWidget* second = new QWidget();
+  sw->addWidget(second);
+  win.show();
   return app.exec();
 }
