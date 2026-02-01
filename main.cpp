@@ -105,16 +105,37 @@ int main(int argc, char* argv[]) {
   });
   QObject::connect(ch, &QPushButton::clicked, [&lab, &win, &theme, &b, &dat](){
     if (theme) {
-      lab->setStyleSheet("QLabel {font-family: 'Times new Roman'; font-size: 96px; color: #ffffff; background-color: #212529; border: 1px solid #3498db; border-radius: 10px; padding: 20px 20px;}");
+      lab->setStyleSheet("QLabel {font-family: 'Times new Roman';"
+          "font-size: 96px;"
+          "color: #ffffff;"
+          "background-color: #212529;"
+          "border: 1px solid #3498db;"
+          "border-radius: 10px;"
+          "padding: 20px 20px;}");
       win.setStyleSheet("QMainWindow {background-color: #f8f9fa}");
-      b->setStyleSheet("QPushButton{background-color: #4361ee; border-radius: 10px;} QPushButton:hover {background-color: #3a56e4;} QPushButton:pressed {background-color: #2d46b9;}");
-      dat->setStyleSheet("QLabel {font-family: 'Times new Roman'; font-size: 32px; color: #000000}");
+      b->setStyleSheet("QPushButton{background-color: #4361ee;"
+          "border-radius: 10px;}" 
+          "QPushButton:hover {background-color: #3a56e4;}"
+          "QPushButton:pressed {background-color: #2d46b9;}");
+      dat->setStyleSheet("QLabel {font-family: 'Times new Roman';"
+          "font-size: 32px;"
+          "color: #000000}");
       theme = 0;
     } else {
-      b->setStyleSheet("QPushButton{background-color: #4361ee; border-radius: 10px;} QPushButton:hover {background-color: #3a56e4;} QPushButton:pressed {background-color: #2d46b9;}");
-      lab->setStyleSheet("QLabel {font-family: 'Times new Roman'; font-size: 96px; color: #1e1e2e; background-color: #f5f5f5; border: 1px solid #3498db; border-radius: 10px; padding: 20px 20px;}");
+      b->setStyleSheet("QPushButton{background-color: #4361ee;"
+          "border-radius: 10px;}" 
+          "QPushButton:hover {background-color: #3a56e4;}"
+          "QPushButton:pressed {background-color: #2d46b9;}");
+      lab->setStyleSheet("QLabel {font-family: 'Times new Roman';"
+          "font-size: 96px; color: #1e1e2e;" 
+          "background-color: #f5f5f5;"
+          "border: 1px solid #3498db;"
+          "border-radius: 10px;" 
+          "padding: 20px 20px;}");
       win.setStyleSheet("QMainWindow {background-color: #1e1e2e}");
-      dat->setStyleSheet("QLabel {font-family: 'Times new Roman'; font-size: 32px; color: #ffffff}");
+      dat->setStyleSheet("QLabel {font-family: 'Times new Roman';"
+          "font-size: 32px;"
+          "color: #ffffff}");
       theme = 1;
     }
   });
