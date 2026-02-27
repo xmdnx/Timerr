@@ -2,5 +2,5 @@
 
 #include <QFont>
 
-inline QFont styleTimeLabel = QFont("Times New Roman", 96);
-inline QFont styleDateLabel = QFont("Times New Roman", 18);
+inline const QFont styleTimeLabel = QFont("Times New Roman", 96);
+inline const QFont styleDateLabel = QFont("Times New Roman", 18);
