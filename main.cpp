@@ -103,7 +103,9 @@ int main(int argc, char* argv[]) {
 	QTimer* timer = new QTimer(timerScreen);
 
 	// secondScreen setup
+	QVBoxLayout* secondLayout = new QVBoxLayout(secondScreen);
 	QPushButton* switchScreenButton2 = new QPushButton(secondScreen);
+	secondLayout->addWidget(switchScreenButton2);
 
 	// timerScreen layout setup
 	QVBoxLayout* timerLayout = new QVBoxLayout(timerScreen);
