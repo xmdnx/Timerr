@@ -172,8 +172,10 @@ int main(int argc, char* argv[]) {
 	QObject::connect(
 		timerControlButton, 
 		&QPushButton::clicked, 
-		[&isRunning]() {
+		[&isRunning, &timeLabel, &dateLabel, &currentTimezoneIndex]() {
 			isRunning = !isRunning;
+			updateTimeLabel(timeLabel, currentTimezoneIndex);
+			updateDateLabel(dateLabel);
 		}
 	);
 
@@ -202,7 +204,7 @@ int main(int argc, char* argv[]) {
 		}
 	);
 
-	timer->start(500);
+	timer->start(1000);
 	window.show();
 	return app.exec();
 }
